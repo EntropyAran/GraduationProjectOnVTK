@@ -42,18 +42,18 @@ style = vtk.vtkInteractorStyleTrackballCamera()
 iren.SetInteractorStyle(style)
 
 
-### 这一段用于设置照明，一共两个，蓝色和绿色
-##myLight = vtk.vtkLight()
-##myLight.SetColor(0, 1,0)
-##myLight.SetPosition(0, 0, 1)
-##myLight.SetFocalPoint(ren.GetActiveCamera().GetFocalPoint())
-##ren.AddLight(myLight)
-##
-##myLight2 = vtk.vtkLight()
-##myLight2.SetColor(0, 0, 1)
-##myLight2.SetPosition(0, 0, -1)
-##myLight2.SetFocalPoint(ren.GetActiveCamera().GetFocalPoint())
-##ren.AddLight(myLight2)
+# 这一段用于设置照明，一共两个，蓝色和绿色
+myLight = vtk.vtkLight()
+myLight.SetColor(0, 1,0)
+myLight.SetPosition(0, 0, 1)
+myLight.SetFocalPoint(ren.GetActiveCamera().GetFocalPoint())
+ren.AddLight(myLight)
+
+myLight2 = vtk.vtkLight()
+myLight2.SetColor(0, 0, 1)
+myLight2.SetPosition(0, 0, -1)
+myLight2.SetFocalPoint(ren.GetActiveCamera().GetFocalPoint())
+ren.AddLight(myLight2)
 
 
 # 开始进行可视化的开始
