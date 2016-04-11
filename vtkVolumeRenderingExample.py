@@ -5,7 +5,7 @@ from vtk import *
 
 
 #读取，使用的是vtkMetaImageReader类读取MHD格式
-file_name = r"backpack8.mhd"
+file_name = r"G:\graduate project\VolumeRenderData\backpack8.raw\backpack8.mhd"
 reader = vtkMetaImageReader()
 reader.SetFileName(file_name)
 
