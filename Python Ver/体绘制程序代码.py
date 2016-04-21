@@ -26,9 +26,11 @@ output = reader.GetOutputPort()
 '''
 
 #定义体绘制算法函数
-rayCastFun = vtkVolumeRayCastCompositeFunction()  #光线投射法
+##rayCastFun = vtkVolumeRayCastCompositeFunction()  #光线投射法
 ##rayCastFun = vtkVolumeRayCastMIPFunction() #最大密度法
-##rayCastFun = vtkVolumeRayCastIsosurfaceFunction()  #特定等值面法
+rayCastFun = vtkVolumeRayCastIsosurfaceFunction()  #特定等值面法
+rayCastFun.SetIsoValue(100)  #特定等值面的数值
+
 
 #设置体绘制的Mapper，有两个输入
 volumeMapper = vtkVolumeRayCastMapper()
