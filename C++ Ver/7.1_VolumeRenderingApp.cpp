@@ -1,12 +1,3 @@
-/**********************************************************************
-
-  文件名: 7.1_VolumeRenderingApp.cpp
-  Copyright (c) 张晓东, 罗火灵. All rights reserved.
-  更多信息请访问: 
-    http://www.vtkchina.org (VTK中国)
-	http://blog.csdn.net/www_doling_net (东灵工作室) 
-
-**********************************************************************/
 
 #include <vtkSmartPointer.h>
 #include <vtkImageData.h>
@@ -25,27 +16,30 @@
 #include <vtkImageShiftScale.h>
 #include <vtkImageCast.h>
 #include <vtkFixedPointVolumeRayCastMapper.h>
+#include <vtkImageCast.h>
+#include <vtkMetaImageReader.h>
 
-//测试：../data/mummy.128.vtk
+
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
-	{
-		std::cout<<argv[0]<<" "<<"StructuredPointsFile(*.vtk)"<<std::endl;
-		return EXIT_FAILURE;
-	}
 
-	vtkSmartPointer<vtkStructuredPointsReader> reader =
-		vtkSmartPointer<vtkStructuredPointsReader>::New();
-	reader->SetFileName(argv[1]);
+	vtkSmartPointer<vtkMetaImageReader> reader =
+		vtkSmartPointer<vtkMetaImageReader>::New();
+	reader->SetFileName("G:\\graduate project\\VolumeRenderData\\backpack8.raw\\backpack8.mhd");
 	reader->Update();
+
+	vtkSmartPointer<vtkImageCast> imageCast =
+		vtkSmartPointer<vtkImageCast>::New();
+	imageCast->SetInputConnection(reader->GetOutputPort());
+	imageCast->SetOutputScalarTypeToUnsignedShort();
+	imageCast->Update();
 
 	vtkSmartPointer<vtkVolumeRayCastCompositeFunction> rayCastFun = 
 		vtkSmartPointer<vtkVolumeRayCastCompositeFunction>::New();
 
 	vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = 
 		vtkSmartPointer<vtkVolumeRayCastMapper>::New();
-	volumeMapper->SetInput(reader->GetOutput());
+	volumeMapper->SetInputConnection(imageCast->GetOutputPort());
 	volumeMapper->SetVolumeRayCastFunction(rayCastFun);
 
 	//设置光线采样距离
