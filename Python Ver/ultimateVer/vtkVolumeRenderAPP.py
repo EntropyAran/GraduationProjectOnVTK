@@ -105,9 +105,10 @@ def vtkVolumeRender(fname):
     #颜色传输函数
     color = vtkColorTransferFunction()
     color.AddRGBPoint(0.000,  0.00, 0.00, 0.00)
-    color.AddRGBPoint(64.00,  1.00, 0.52, 0.30)
-    color.AddRGBPoint(190.0,  1.00, 1.00, 1.00)
-    color.AddRGBPoint(220.0,  0.20, 0.20, 0.20)
+    color.AddRGBPoint(50.00,  1.00, 0.00, 0.00)
+    color.AddRGBPoint(100.0,  0.00, 1.00, 0.00)
+    color.AddRGBPoint(150.0,  0.00, 0.00, 1.00)
+    color.AddRGBPoint(200.0,  1.00, 1.00, 1.00)
     volumeProperty.SetColor(color) #导入颜色函数
 
     #梯度不透明函数
