@@ -1,4 +1,5 @@
-
+//////////////////////////////////////////////////////////////////////////////////////////
+/////头文件部分
 #include <vtkSmartPointer.h>
 #include <vtkImageData.h>
 #include <vtkStructuredPoints.h>
@@ -22,7 +23,8 @@
 
 int main(int argc, char *argv[])
 {
-
+	////////////////////////////////////////////////////////////////////////////////////////////
+	///////文件读取
 	vtkSmartPointer<vtkMetaImageReader> reader =
 		vtkSmartPointer<vtkMetaImageReader>::New();
 	reader->SetFileName("G:\\graduate project\\VolumeRenderData\\backpack8.raw\\backpack8.mhd");
@@ -31,11 +33,12 @@ int main(int argc, char *argv[])
 	vtkSmartPointer<vtkImageCast> imageCast =
 		vtkSmartPointer<vtkImageCast>::New();
 	imageCast->SetInputConnection(reader->GetOutputPort());
-	imageCast->SetOutputScalarTypeToUnsignedShort();
+	imageCast->SetOutputScalarTypeToUnsignedShort();/////类型转换
 	imageCast->Update();
-
+    ////////////////////////////////////////////////////////////////////////////////////////////
+	///////体绘制的可视化管线
 	vtkSmartPointer<vtkVolumeRayCastCompositeFunction> rayCastFun = 
-		vtkSmartPointer<vtkVolumeRayCastCompositeFunction>::New();
+		vtkSmartPointer<vtkVolumeRayCastCompositeFunction>::New();//光线投影法
 
 	vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = 
 		vtkSmartPointer<vtkVolumeRayCastMapper>::New();
@@ -70,14 +73,14 @@ int main(int argc, char *argv[])
 
 	vtkSmartPointer<vtkPiecewiseFunction> volumeGradientOpacity =
 		vtkSmartPointer<vtkPiecewiseFunction>::New();
-	volumeGradientOpacity->AddPoint(10,  0.0);
+	volumeGradientOpacity->AddPoint(10,  0.0);//设置梯度不透明函数
 	volumeGradientOpacity->AddPoint(90,  0.5);
 	volumeGradientOpacity->AddPoint(100, 1.0);
 	//volumeProperty->SetGradientOpacity(volumeGradientOpacity);//设置梯度不透明度效果对比
 
 	vtkSmartPointer<vtkColorTransferFunction> color = 
 		vtkSmartPointer<vtkColorTransferFunction>::New();
-	color->AddRGBPoint(0.000,  0.00, 0.00, 0.00);
+	color->AddRGBPoint(0.000,  0.00, 0.00, 0.00);//设置颜色传输函数
 	color->AddRGBPoint(64.00,  1.00, 0.52, 0.30);
 	color->AddRGBPoint(190.0,  1.00, 1.00, 1.00);
 	color->AddRGBPoint(220.0,  0.20, 0.20, 0.20);
@@ -87,7 +90,8 @@ int main(int argc, char *argv[])
 		vtkSmartPointer<vtkVolume>::New();
 	volume->SetMapper(volumeMapper);
 	volume->SetProperty(volumeProperty);
-
+	////////////////////////////////////////////////////////////////////////////////////////////
+	///////渲染引擎部分
 	vtkSmartPointer<vtkRenderer> ren = vtkSmartPointer<vtkRenderer>::New();
 	ren->SetBackground(1.0, 1.0, 1.0);
 	ren->AddVolume( volume ); 
@@ -102,7 +106,8 @@ int main(int argc, char *argv[])
 		vtkSmartPointer<vtkRenderWindowInteractor>::New();
 	iren->SetRenderWindow(renWin);
 	ren->ResetCamera();
-
+	////////////////////////////////////////////////////////////////////////////////////////////
+	///////VTK程序初始化
 	renWin->Render();
 	iren->Start();
 
