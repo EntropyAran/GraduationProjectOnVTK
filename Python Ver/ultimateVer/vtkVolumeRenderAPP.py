@@ -67,10 +67,10 @@ def vtkVolumeRender(fname):
     #############################################################################
 
     #定义体绘制算法函数
-    ##rayCastFun = vtkVolumeRayCastCompositeFunction()  #光线投射法
+    rayCastFun = vtkVolumeRayCastCompositeFunction()  #光线投射法
     ##rayCastFun = vtkVolumeRayCastMIPFunction() #最大密度法
-    rayCastFun = vtkVolumeRayCastIsosurfaceFunction()  #特定等值面法
-    rayCastFun.SetIsoValue(100)  #特定等值面的数值
+    ##rayCastFun = vtkVolumeRayCastIsosurfaceFunction()  #特定等值面法
+    ##rayCastFun.SetIsoValue(100)  #特定等值面的数值
 
 
     #设置体绘制的Mapper，有两个输入
@@ -90,7 +90,7 @@ def vtkVolumeRender(fname):
     #体绘制属性设置
     volumeProperty = vtkVolumeProperty()
     volumeProperty.SetInterpolationTypeToLinear()
-    volumeProperty.ShadeOn() #打开或者关闭阴影测试
+    ##volumeProperty.ShadeOn() #打开或者关闭阴影测试
     volumeProperty.SetAmbient(0.4)
     volumeProperty.SetDiffuse(0.6)
     volumeProperty.SetSpecular(0.2)
