@@ -51,7 +51,7 @@ class MyForm(wx.Frame):
  
  #################################################################################
 def vtkVolumeRender(fname):
-    
+    #################################################################################
     #读取，使用的是vtkMetaImageReader类读取MHD格式
     file_name = fname
     reader = vtkMetaImageReader()
@@ -79,7 +79,7 @@ def vtkVolumeRender(fname):
     volumeMapper.SetVolumeRayCastFunction(rayCastFun)  #另一个是设置体绘制的光线投射函数
 
 
-    #########接下来到了设置体绘制的各种属性的时间www############################
+    #########接下来设置体绘制的各种属性######################################
     '''
     #设置光线采样距离
     volumeMapper.SetSampleDistance(volumeMapper.GetSampleDistance()*4)
